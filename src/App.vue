@@ -1,8 +1,8 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <Navbar />
   </div>
+
   <router-view />
 </template>
 
@@ -13,6 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+*{
+  margin:0;
+  padding: 0;
 }
 
 #nav {
@@ -28,3 +33,15 @@
   }
 }
 </style>
+
+<script>
+import Navbar from "./views/layouts/navbar.vue";
+
+export default{
+  name: "App",
+  components: {
+    Navbar
+  }
+}
+</script>
+
