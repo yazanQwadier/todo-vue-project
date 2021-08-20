@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar">
+    <div class="custom-navbar">
         <ul>
             <li>
                 <img alt="Vue logo" src="../../assets/logo.png" class="brand" />
@@ -13,14 +13,23 @@
                 <router-link to="/about" tag="li">About</router-link>
             </li>
 
-            <li><button>=</button></li>
+            <li>
+                <template v-if="user == null">
+                    <router-link to="/login" class="btn btn-secondary mx-1">Login</router-link>
+                    <router-link to="/signup" class="btn btn-outline-secondary mx-1">Signup</router-link>
+                </template>
+                <template v-else>
+                    <span class="text-light">{{ user['username'] }}</span>
+                    <button type="button" class="btn btn-danger mx-1" @click="logout">logout</button>
+                </template>
+            </li>
         </ul>
 
     </div>
 </template>
 
 <style scoped>
-    .navbar{
+    .custom-navbar{
         background: #505050;
     }
     ul{
@@ -45,16 +54,6 @@
         margin-left: auto;
     }
 
-    ul li:last-child button{
-        width: 45px;
-        padding: 5px;
-        background: #d0d0d040;
-        border: 1px solid #8c8c8c;
-        border-radius: 5px;
-        font-size: 18px;
-        color: white;
-    }
-
     ul li a {
         color: #f1f1f1;
         text-decoration: none;
@@ -63,7 +62,31 @@
 </style>
 
 <script>
-export default {
-    name: "Navbar"
-}
+    import jQuery from "jquery";
+    const $ = jQuery;
+    window.$ = $;
+    
+    export default {
+        name: "Navbar",
+        data(){
+            return {
+            user: null
+            }
+        },
+        created: function(){
+            let storage = window.localStorage;
+            let user = storage.getItem('user');
+            if( user != null && user != undefined ){
+                user = JSON.parse(user);
+                this.user = user;
+            }
+        },
+        methods: {
+            "logout": function(){
+                let storage = window.localStorage;
+                storage.removeItem('user');
+                window.location.href = "/";
+            }
+        }
+    }
 </script>
