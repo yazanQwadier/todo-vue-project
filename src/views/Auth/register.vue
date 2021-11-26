@@ -1,16 +1,16 @@
 <template>
     <div>
         <form>
-            <h3 class="my-1">SignUp</h3>
+            <h3 class="my-1">انشاء حساب جديد</h3>
             
             <div class="alert-status"></div>
 
-            <input type="text" v-model="username" id="username-signup" class="form-control my-2" placeholder="Username">
-            <input type="text" v-model="email" id="email-signup" class="form-control my-2" placeholder="Email">
-            <input type="password" v-model="password" id="password-signup" class="form-control my-2" placeholder="Password">
+            <input type="text" v-model="username" id="username-signup" class="form-control my-2" placeholder="اسم المستخدم">
+            <input type="text" v-model="email" id="email-signup" class="form-control my-2" placeholder="البريد الالكتروني">
+            <input type="password" v-model="password" id="password-signup" class="form-control my-2" placeholder="كلمة المرور">
 
-            <button class="btn btn-success" type="button" @click="register">SignUp</button>
-            <router-link to="/login" class="login-link">Login</router-link>
+            <button class="btn btn-success" type="button" @click="register">انشاء</button>
+            <router-link to="/login" class="login-link">تسجيل الدخول</router-link>
         </form>
     </div>
 </template>
@@ -36,6 +36,7 @@
 
 <script>
 import axios from 'axios';
+import config from '../../../public/config';
 
 export default {
     name: "SignUp",
@@ -55,7 +56,7 @@ export default {
                 formData.append('email', this.email);
                 formData.append('password', this.password);
 
-                axios.post("http://localhost/todo-project/register.php", formData)
+                axios.post( config.api_url() +"/authentication/register", formData)
                     .then((response) => {
                         if( response.status == 200 ){
                             if(response.data.status != "failed"){
@@ -93,7 +94,6 @@ export default {
                                 }
                             }
                         }
-                        console.log(response);
                     })
                     .catch((error) => {
                         console.log(error);

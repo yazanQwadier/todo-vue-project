@@ -1,15 +1,15 @@
 <template>
     <div>
         <form>
-            <h3 class="my-1">Login</h3>
+            <h3 class="my-1">تسجيل الدخول</h3>
 
             <div class="alert-status"></div>
 
-            <input type="text" v-model="email" id="email-login" class="form-control my-2" placeholder="Email">
-            <input type="password" v-model="password" id="password-login" class="form-control my-2" placeholder="Password">
+            <input type="text" v-model="email" id="email-login" class="form-control my-2" placeholder="البريد الالكتروني">
+            <input type="password" v-model="password" id="password-login" class="form-control my-2" placeholder="كلمة المرور">
 
-            <button class="btn btn-success" type="button" v-on:click="login">Login</button>
-            <router-link to="/signup" class="new-account">New Accout</router-link>
+            <button class="btn btn-success" type="button" v-on:click="login">دخول</button>
+            <router-link to="/signup" class="new-account">انشاء حساب جديد</router-link>
         </form>
     </div>
 </template>
@@ -35,6 +35,7 @@
 
 <script>
     import axios from 'axios';
+    import config from '../../../public/config';
 
     export default {
         name: "Login",
@@ -47,11 +48,11 @@
         methods: {
             "login": function(){
                 if(this.email != "" && this.password != ""){
-                    var formData = new FormData()
+                    var formData = new FormData();
                     formData.append('email', this.email);
                     formData.append('password', this.password);
 
-                    axios.post("http://localhost/todo-project/login.php", formData)
+                    axios.post( config.api_url()+ "/authentication/login", formData)
                         .then((response) => {
                             if( response.status == 200 ){
                                 let status = response.data['status'];
@@ -73,7 +74,6 @@
                                     statusElement.appendChild(newStatus);
                                 }
                             }
-                            console.log(response);
                         })
                         .catch(function (error) {
                             console.log(error);

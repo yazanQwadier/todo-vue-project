@@ -1,26 +1,22 @@
 <template>
-    <div class="custom-navbar">
+    <div class="custom-navbar" dir="rtl" lang="ar">
         <ul>
             <li>
-                <img alt="Vue logo" src="../../assets/logo.png" class="brand" />
+                <img alt="Vue logo" src="../../../public/light-logo.png" class="brand" />
             </li>
             
             <li>
-                <router-link to="/" tag="li">Home</router-link> |
-            </li>
-
-            <li>
-                <router-link to="/about" tag="li">About</router-link>
+                <router-link to="/" tag="li">الرئيسية</router-link> |
             </li>
 
             <li>
                 <template v-if="user == null">
-                    <router-link to="/login" class="btn btn-secondary mx-1">Login</router-link>
-                    <router-link to="/signup" class="btn btn-outline-secondary mx-1">Signup</router-link>
+                    <router-link to="/login" class="btn btn-secondary mx-1">تسجيل الدخول</router-link>
+                    <router-link to="/signup" class="btn btn-outline-secondary mx-1">حساب جديد</router-link>
                 </template>
                 <template v-else>
                     <span class="text-light">{{ user['username'] }}</span>
-                    <button type="button" class="btn btn-danger mx-1" @click="logout">logout</button>
+                    <button type="button" class="btn btn-danger btn-sm mx-1" @click="logout">تسجيل الخروج</button>
                 </template>
             </li>
         </ul>
@@ -39,7 +35,7 @@
     }
 
     ul .brand{
-        width: 70px;
+        width: 80px;
     }
 
     ul li{
@@ -51,7 +47,7 @@
     }
 
     ul li:last-child{
-        margin-left: auto;
+        margin-inline-start: auto;
     }
 
     ul li a {
@@ -63,14 +59,21 @@
 
 <script>
     import jQuery from "jquery";
+    import store from '../../store/index';
+
     const $ = jQuery;
     window.$ = $;
     
     export default {
         name: "Navbar",
+        store,
         data(){
             return {
-            user: null
+            }
+        },
+        computed: {
+            user(){
+                return this.$store.state.auth.user;
             }
         },
         created: function(){
@@ -85,6 +88,7 @@
             "logout": function(){
                 let storage = window.localStorage;
                 storage.removeItem('user');
+                this.$store.commit('auth/clearUser');
                 window.location.href = "/";
             }
         }

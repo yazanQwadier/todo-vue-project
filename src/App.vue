@@ -3,7 +3,9 @@
     <Navbar />
   </div>
 
-  <router-view />
+  <div dir="rtl" lang="ar">
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss">
@@ -31,6 +33,9 @@
       color: #42b983;
     }
   }
+}
+body{
+  background: #fdfdfd !important;
 }
 </style>
 
