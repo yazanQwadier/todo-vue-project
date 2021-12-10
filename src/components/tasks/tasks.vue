@@ -7,10 +7,19 @@
                 </div>
             </div>
             <div v-if="FinishedTasksList.length > 0">
-                <h5>ما تم إنجازه  <fa icon="check-double" /></h5>
-                <div v-for="task in FinishedTasksList" :key="'finished-' + task.id" class="task-item">
-                    <TaskItem :task="task" />
+                <div class="d-flex justify-content-around mt-2">
+                    <h5>ما تم إنجازه  <fa icon="check-double" /></h5>
+                    <button class="btn" @click="showFinishTasksList = !showFinishTasksList">
+                        <fa icon="chevron-up" v-if="showFinishTasksList" />
+                        <fa icon="chevron-down" v-else />
+                    </button>
                 </div>
+
+                <template v-if="showFinishTasksList">
+                    <div v-for="task in FinishedTasksList" :key="'finished-' + task.id" class="task-item">
+                        <TaskItem :task="task" />
+                    </div>
+                </template>
             </div>
         </template>
         <div v-else>
@@ -117,6 +126,7 @@ export default {
     data(){
         return {
             FinishedTasksList: [],
+            showFinishTasksList: false,
         }
     },
     computed: {
@@ -129,19 +139,22 @@ export default {
         tasksList: function(){
             if( this.$store.state.tasks.tasksList != null ){
                 let arr = this.$store.state.tasks.tasksList[this.activeCategory.id];
-                if( arr != null ){
-                    this.getFinishedTasks(arr);
+                if( arr != null && arr != undefined ){
+                    this.FinishedTasksList = this.getFinishedTasks(arr);
                     return this.getUnFinishedTasks(arr);
                 }
+                this.FinishedTasksList = [];
                 return [];
            }
-            else 
+            else {
+                this.FinishedTasksList = [];
                 return [];
+            }
         },
     },
     methods: {
         getFinishedTasks(arr){
-            this.FinishedTasksList = arr.filter(function(item){ return item.has_done == 1; });
+            return arr.filter(function(item){ return item.has_done == 1; });
         },
         getUnFinishedTasks(arr){
             return arr.filter(function(item){ return item.has_done != 1; });
