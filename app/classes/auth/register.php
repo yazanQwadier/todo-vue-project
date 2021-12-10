@@ -1,7 +1,6 @@
 <?php
-namespace App\auth;
+namespace App\classes\auth;
 
-require './bootstrap.php';
 use App\services\RegisterService;
 
 class Register {

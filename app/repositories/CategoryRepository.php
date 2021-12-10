@@ -1,7 +1,6 @@
 <?php
 namespace App\repositories;
 
-require './bootstrap.php';
 use App\db\Connection;
 
 class CategoryRepository {

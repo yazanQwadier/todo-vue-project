@@ -1,7 +1,6 @@
 <?php
 namespace App\services;
 
-require './bootstrap.php';
 use App\db\Connection;
 
 class LoginService {

@@ -1,7 +1,6 @@
 <?php
 namespace App\services;
 
-require './bootstrap.php';
 use App\db\Connection;
 
 class TasksService {
@@ -22,6 +21,7 @@ class TasksService {
 
     public function insert($data){
         $connection = Connection::getInstance();
+        $response = ['status' => false, 'task' => null];
 
         $sql = $connection->prepare( "INSERT INTO tasks (user_id, category_id, priority_id, content, created_at) VALUES (?, ?, ?, ?, ?)" );
         $time = date("Y-m-d h:i:s", time());
@@ -30,7 +30,10 @@ class TasksService {
         $task = $this->task($sql->insert_id);
         $sql->close();
 
-        return json_encode(['status' => true, 'task' => $task]);
+        if( !is_null($task) ){
+            $response = ['status' => true, 'task' => $task];
+        }
+        return json_encode($response);
     }
 
     public function update($task_id, $data){
