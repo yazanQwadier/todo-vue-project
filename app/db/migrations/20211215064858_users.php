@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CreateTestTable extends AbstractMigration
+final class Users extends AbstractMigration
 {
     /**
      * Change Method.
@@ -18,10 +18,13 @@ final class CreateTestTable extends AbstractMigration
      */
     public function change(): void
     {
-        // create the table
-        $table = $this->table('tasks_categories');
-        $table->addColumn('id', 'integer')
-                ->addColumn('title', 'varchar')
+        if( !$this->hasTable('users') ){
+            $this->table('users')
+                ->addColumn('username', 'text')
+                ->addColumn('email', 'text')
+                ->addColumn('password', 'text')
+                ->addTimestamps(null, null)
                 ->create();
+        }
     }
 }

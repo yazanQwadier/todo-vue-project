@@ -3,11 +3,11 @@
 return
 [
     'paths' => [
-        'migrations' => '%%PHINX_CONFIG_DIR%%/db/migrations',
-        'seeds' => '%%PHINX_CONFIG_DIR%%/db/seeds'
+        'migrations' => '%%PHINX_CONFIG_DIR%%/app/db/migrations',
+        'seeds' => '%%PHINX_CONFIG_DIR%%/app/db/seeds'
     ],
     'environments' => [
-        'default_migration_table' => 'phinxlog',
+        'default_migration_table' => 'migrations_log',
         'default_environment' => 'development',
         'production' => [
             'adapter' => 'mysql',
