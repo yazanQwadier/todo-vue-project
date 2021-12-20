@@ -9,7 +9,7 @@
             <div v-if="FinishedTasksList.length > 0">
                 <div class="d-flex justify-content-around mt-2">
                     <h5>ما تم إنجازه  <fa icon="check-double" /></h5>
-                    <button class="btn" @click="showFinishTasksList = !showFinishTasksList">
+                    <button class="btn showFinishTasksListBtn" @click="showFinishTasksList = !showFinishTasksList">
                         <fa icon="chevron-up" v-if="showFinishTasksList" />
                         <fa icon="chevron-down" v-else />
                     </button>
@@ -39,7 +39,6 @@
         max-height: 65vh;
         overflow: auto;
     }
-
     .task-item {
         border: 1px solid #e7e7e7;
         padding: 7px;
@@ -48,20 +47,20 @@
         width: 80%;
         transition: 0.2s;
     }
-
     .task-item p{
         font-size: 17px;
         padding: 0;
         margin: 0;
     }
-
     .task-item:hover {
         cursor: pointer;
         border: 1px solid #a7a7a7;
         box-shadow: 0px 0px 5px #dddddd;
         background: #f7f7f7;
     }
-
+    .dark-mode .task-item:hover {
+        background: #363636de;
+    }
     .task-content{
         border: 1px solid #d5d5d5b8;
         padding: 5px;
@@ -71,26 +70,26 @@
     .task-content:focus{
         outline: 1px dashed darkgrey;
     }
-
+    .dark-mode .showFinishTasksListBtn{
+        color:white;
+    }
     .priority{
         font-size: 13px;
         padding: 5px;
         border: 0px;
         border-radius: 8px;
+        color: black;
         box-shadow: 0px 0px 3px #ddddddcf;
     }
-
     .priority-select{
         border: 1px solid #e5e5e5;
         padding: 4px;
         border-radius: 5px;
         margin: 0px 4px;
     }
-
     .priority-select:focus{
         outline: 1px dashed darkgrey;
     }
-
     .has-done-btn{
         width: 19px;
         height: 19px;
@@ -100,14 +99,43 @@
         margin: 0px 5px;
         overflow: hidden;
     }
-
     .checked-done-btn{
         background: #4e4e4e;
     }
-
     .has-done-btn > .check-icon{
         width: 11px;
         color: white;
+    }
+
+    @media (max-width: 500px){
+        .tasks-layout{
+            padding: 9px 5px;
+        }
+        .task-item {
+            padding: 6px;
+            border-radius: 15px;
+            margin: 1px auto;
+            width: 95%;
+        }
+        .task-item p {
+            font-size: 14px;
+        }
+        .has-done-btn {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin: 0px 2px;
+        }
+        .task-content{
+            padding: 3px;
+            width: 100%;
+            font-size: 15px;
+        }
+        .priority-select {
+            font-size: 15px;
+            padding: 2px;
+            margin: 2px;
+        }
     }
 </style>
 

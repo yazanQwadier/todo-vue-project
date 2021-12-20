@@ -12,57 +12,54 @@
           <br>
 
           <div class="row mx-0">
-            <div class="col-4">
+            <div class="col-12 col-md-4">
               <CategoriesTemplate />
             </div>
             
-            <div class="col">
+            <div class="col p-1 p-md-2">
               <TasksTemplate v-if="activeCategory != null" />
             </div>
           </div>
         </div>
 
         <template v-else>
-          <h3>مرحباً أيها الزائر :)</h3>
-          <p>قم بتسجيل الدخول لتتمكن من جدولك مهامك بكل سهولة </p>
+          <WelcomeTemplate />
         </template>
-
       </div>
   </div>
 </template>
 
 <style scoped>
-.spikes {
-  position: relative;
-  background: #ffffff00;
-  width: 80%;
-  height: 5px;
-  margin: 0px auto;
-}
-
-.spikes::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  left: 0%;
-  top: 100%;
-  z-index: 10;
-  display: block;
-  height: 3px;
-  background-size: 10px 100%;
-  background-image: linear-gradient(
-  135deg, #d5d5d5 25%, transparent 25%), linear-gradient(
-  225deg, #959595 25%, transparent 25%);
-      background-position: 0 0;
-}
+  .spikes {
+    position: relative;
+    background: #ffffff00;
+    width: 80%;
+    height: 5px;
+    margin: 0px auto;
+  }
+  .spikes::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    left: 0%;
+    top: 100%;
+    z-index: 10;
+    display: block;
+    height: 3px;
+    background-size: 10px 100%;
+    background-image: linear-gradient(135deg, #d5d5d5 25%, transparent 25%), 
+                      linear-gradient(225deg, #959595 25%, transparent 25%);
+    background-position: 0 0;
+  }
 </style>
 
 <script>
 import store from '../store/index';
 import CategoriesTemplate from '../components/categories.vue';
 import TasksTemplate from '../components/tasks/tasks.vue';
-import axios from 'axios';
+import WelcomeTemplate from '../components/welcome.vue';
 import config from '../../public/config';
+import axios from 'axios';
 
 export default {
   name: "Home",
@@ -70,10 +67,7 @@ export default {
   components: {
     CategoriesTemplate,
     TasksTemplate,
-  },
-  data(){
-    return {
-    }
+    WelcomeTemplate,
   },
   computed: {
     user(){

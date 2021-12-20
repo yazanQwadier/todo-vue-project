@@ -75,7 +75,7 @@ let tasks = {
   actions: {}
 }
 
-
+// General Settings Like (dark_mode)
 let priorities = {
   namespaced: true,
   state: {
@@ -89,6 +89,19 @@ let priorities = {
   actions:{}
 };
 
+let general = {
+  namespaced: true,
+  state: {
+    dark_mode: false,
+  }, 
+  mutations: {
+    setDarkMode(state, dark){
+      state.dark_mode = dark;
+    }
+  },
+  actions:{}
+}
+
 export default createStore({
   state: {},
   mutations: {},
@@ -97,6 +110,7 @@ export default createStore({
     auth,
     categories,
     tasks,
-    priorities
+    priorities,
+    general
   },
 });

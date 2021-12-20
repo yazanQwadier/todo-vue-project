@@ -4,18 +4,16 @@
             <ul class="p-0">
                 <li v-for="category in categories" :key="category.id" 
                         :class="(activeCategory?.id == category.id)? 'active-category': ''"  @click="changeGlobalCategory(category)">
-                    {{ category.title }} &#9989;
+                    {{ category.title }} 
+                    <fa icon="tasks" />
                 </li>
             </ul>
         </div>
-
-        
     </div>
 </template>
 
 <style scoped>
     .categories-layout{
-        background: #fdfdfd;
         height: 65vh;
     }
     ul {
@@ -39,6 +37,17 @@
         background: #f7f7f7;
         box-shadow: 0px 0px 20px #e1e1e1;
         font-weight: bold;
+    }
+    .dark-mode .active-category{
+        box-shadow: 0px 0px 20px #787878;
+        color: #ffffff;
+        background: #353448 !important;
+    }
+
+    @media (max-width: 500px) {
+        .categories-layout{
+            height: 50vh;
+        }
     }
 </style>
 

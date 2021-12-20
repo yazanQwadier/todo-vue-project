@@ -9,34 +9,45 @@
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  @font-face {
+    font-family: tajawal;
+    src: url('../public/fonts/Tajawal/Tajawal-Regular.ttf');
+  }
 
-*{
-  margin:0;
-  padding: 0;
-}
+  #app {
+    font-family: tajawal, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+  }
 
-#nav {
-  padding: 30px;
+  *{
+    margin:0;
+    padding: 0;
+  }
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  #nav {
+    padding: 30px;
 
-    &.router-link-exact-active {
-      color: #42b983;
+    a {
+      font-weight: bold;
+      color: #2c3e50;
+
+      &.router-link-exact-active {
+        color: #42b983;
+      }
     }
   }
-}
-body{
-  background: #fdfdfd !important;
-}
+
+  body{
+    background: #fdfdfd !important;
+    color: #2c3e50;
+  }
+
+  .dark-mode{
+    background: black !important;
+    color: white !important;
+  }
 </style>
 
 <script>
@@ -46,7 +57,16 @@ export default{
   name: "App",
   components: {
     Navbar
+  },
+  created: function(){
+    let dark_mode = localStorage.getItem("dark_mode");
+    if( dark_mode == '1' ){
+      window.document.body.classList.add("dark-mode");
+      this.$store.commit('general/setDarkMode', true);
+    }
+    else{
+      this.$store.commit('general/setDarkMode', false);
+    }
   }
 }
 </script>
-

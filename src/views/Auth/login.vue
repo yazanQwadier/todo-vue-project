@@ -1,20 +1,25 @@
 <template>
     <div>
-        <form>
-            <h3 class="my-1">تسجيل الدخول</h3>
+        <div class="login-layout">
+            <form>
+                <h3 class="my-1">تسجيل الدخول</h3>
 
-            <div class="alert-status"></div>
+                <div class="alert-status"></div>
 
-            <input type="text" v-model="email" id="email-login" class="form-control my-2" placeholder="البريد الالكتروني">
-            <input type="password" v-model="password" id="password-login" class="form-control my-2" placeholder="كلمة المرور">
+                <input type="text" v-model="email" id="email-login" class="form-control my-2" placeholder="البريد الالكتروني">
+                <input type="password" v-model="password" id="password-login" class="form-control my-2" placeholder="كلمة المرور">
 
-            <button class="btn btn-success" type="button" v-on:click="login">دخول</button>
-            <router-link to="/signup" class="new-account">انشاء حساب جديد</router-link>
-        </form>
+                <button class="btn btn-success" type="button" v-on:click="login">دخول</button>
+                <router-link to="/signup" class="new-account">انشاء حساب جديد <fa icon="user-circle" /></router-link>
+            </form>
+        </div>
     </div>
 </template>
 
 <style scoped>
+    .login-layout {
+        margin: 16vh auto;
+    }
     form{
         width: 36%;
         margin: auto;
@@ -23,13 +28,27 @@
         border-radius: 22px;
         padding: 18px;
     }
-
+    .dark-mode form{
+        background: #343434;
+    }
     .new-account{
         color: #198754;
         text-decoration: none;
         font-size: 16px;
         text-align: start;
         display: block;
+    }
+
+    @media (max-width: 600px) {
+        form{
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 300px) {
+        form{
+            width: 90%;
+        }
     }
 </style>
 

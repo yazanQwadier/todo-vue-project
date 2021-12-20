@@ -2,7 +2,7 @@
     <div>
         <div class="d-flex justify-content-between align-items-center">
             <!-- Edit Task Section -->
-            <div v-if="editingTask != null && editingTask.content == task.content" class="d-flex align-items-center w-75">
+            <div v-if="editingTask != null && editingTask.content == task.content" class="d-flex flex-column flex-md-row align-items-center w-100 w-md-75">
                 <input type="text" class="task-content" v-model="editingTask.content" placeholder="تعديل المهمة">
                 <select class="priority-select shadow-sm" v-model="editingTask.priority_id">
                     <option value="">الاولوية</option>
@@ -18,14 +18,14 @@
             <!-- End Edit Task Section -->
 
             <!-- Preview Task Section -->
-            <div class="d-flex justify-content-start align-items-center" v-else>
+            <div class="d-flex justify-content-start align-items-center text-end" v-else>
                 <button @click.prevent="taskDone" class="has-done-btn" :class="(task.has_done == 1)?'checked-done-btn': ''">
                     <template v-if="task.has_done == 1">
                         <fa icon="check" class="check-icon" />
                     </template>
                 </button>
                 <p @click.prevent="editingTask = task">
-                    <span class="priority" :style="'background:' +  task.color">أولوية {{ task.priority_name }}</span>
+                    <span class="priority" :style="'background:' + task.color">أولوية {{ task.priority_name }}</span>
                     {{ task.content }}
                 </p>
             </div>               
@@ -65,6 +65,9 @@ export default {
             list = list.sort(function(item1, item2){ return (item1.priority > item2.priority)? 1 : -1});
             return list;
         },
+        priportyTxtColor: function(){
+            return (this.$store.state.general.dark_mode)? 'black': 'white';
+        }
     },
     methods: {
         editTask: function(){

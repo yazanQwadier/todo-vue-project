@@ -1,21 +1,26 @@
 <template>
     <div>
-        <form>
-            <h3 class="my-1">انشاء حساب جديد</h3>
-            
-            <div class="alert-status"></div>
+        <div class="signup-layout">
+            <form>
+                <h3 class="my-1">انشاء حساب جديد <fa icon="user-circle"/> </h3>
+                
+                <div class="alert-status"></div>
 
-            <input type="text" v-model="username" id="username-signup" class="form-control my-2" placeholder="اسم المستخدم">
-            <input type="text" v-model="email" id="email-signup" class="form-control my-2" placeholder="البريد الالكتروني">
-            <input type="password" v-model="password" id="password-signup" class="form-control my-2" placeholder="كلمة المرور">
+                <input type="text" v-model="username" id="username-signup" class="form-control my-2" placeholder="اسم المستخدم">
+                <input type="text" v-model="email" id="email-signup" class="form-control my-2" placeholder="البريد الالكتروني">
+                <input type="password" v-model="password" id="password-signup" class="form-control my-2" placeholder="كلمة المرور">
 
-            <button class="btn btn-success" type="button" @click="register">انشاء</button>
-            <router-link to="/login" class="login-link">تسجيل الدخول</router-link>
-        </form>
+                <button class="btn btn-success" type="button" @click="register">انشاء</button>
+                <router-link to="/login" class="login-link">تسجيل الدخول</router-link>
+            </form>
+        </div>
     </div>
 </template>
 
 <style scoped>
+    .signup-layout {
+        margin: 16vh auto;
+    }
     form{
         width: 36%;
         margin: auto;
@@ -24,13 +29,27 @@
         border-radius: 22px;
         padding: 18px;
     }
-
+    .dark-mode form{
+        background: #343434;
+    }
     .login-link{
         color: #198754;
         text-decoration: none;
         font-size: 16px;
         text-align: start;
         display: block;
+    }
+
+    @media (max-width: 600px) {
+        form{
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 300px) {
+        form{
+            width: 90%;
+        }
     }
 </style>
 

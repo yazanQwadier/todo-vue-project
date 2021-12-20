@@ -1,8 +1,8 @@
 <template>
     <div>
         <form>
-            <div class="form-inline my-2">
-                <input type="text" class="task-content shadow-sm" v-model="taskContent" :placeholder="'إضافة مهمة جديدة ('+ activeCategory.title + ')' ">
+            <div class="form-inline my-4 my-md-2">
+                <input type="text" class="task-content shadow-sm my-2 my-md-1" v-model="taskContent" :placeholder="'إضافة مهمة جديدة ('+ activeCategory.title + ')' ">
 
                 <select class="priority-select shadow-sm" v-model="taskPriority">
                     <option value="">الاولوية</option>
@@ -36,6 +36,15 @@
     }
     .priority-select:focus{
         outline: 1px dashed darkgrey;
+    }
+
+    @media (max-width: 500px) {
+        .task-content {
+            width: 99%;
+            padding: 6px 6px;
+            margin: 0px 3px;
+            font-size: 14px;
+        }
     }
 </style>
 
