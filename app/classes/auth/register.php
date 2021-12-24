@@ -38,6 +38,7 @@ class Register {
         $user = $register->insert($data);
         if( $user != null ){
             echo json_encode( ["status" => "success", "response" => $user]);
+            exit;
         }
         else{
             echo json_encode( ["status" => "failed", "type" => "unknown", "response" => "There are problem !"]);

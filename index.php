@@ -19,25 +19,7 @@
         $userAuth = new UserAuth();
         echo $userAuth->login($_POST);
     });
-
-    route('/tttt', function(){
-        $client = new Client([
-            'base_uri' => '192.168.1.100:5001',
-            'timeout'  => 3.0,
-        ]);
-        $data = [
-            'user_id' => 3,
-            'category_id' => 1,
-            'content' => "test",
-            'priority_id' => 1,
-        ];
-        $response = $client->request('POST', '/tasks/add', ['form_params' => $data]);
-        $status = json_decode((string)$response->getBody());
-        var_dump($status->status);
-    });
-
   
-
     route('/authentication/register', function(){
         $userAuth = new UserAuth();
         echo $userAuth->singUp($_POST);
