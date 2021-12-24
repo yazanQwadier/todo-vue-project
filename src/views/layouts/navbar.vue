@@ -38,6 +38,7 @@
             </template>
         </ul>
 
+
         <div class="menu-layout" v-if="showMenu">
             <ul>
                 <li>
@@ -125,14 +126,12 @@
 
 <script>
     import jQuery from "jquery";
-    import store from '../../store/index';
 
     const $ = jQuery;
     window.$ = $;
     
     export default {
         name: "Navbar",
-        store,
         data: function(){
             return {
                 showMenu: false,
@@ -141,6 +140,9 @@
         computed: {
             user(){
                 return this.$store.state.auth.user;
+            },
+            screenWidth() {
+                return window.innerWidth;
             }
         },
         methods: {
@@ -153,7 +155,7 @@
             "clearSession": function(){
                 window.localStorage.removeItem('user');
                 this.$store.commit('auth/clearUser');
-                window.location.href = "/";
+                this.$router.push('/');
             },
             "toggleDarkMode": function(){
                 let dark_mode = window.localStorage.getItem('dark_mode');
@@ -175,19 +177,6 @@
                 
                 this.$store.commit('general/setDarkMode', dark_mode_status);
                 window.document.body.classList.toggle('dark-mode');
-            }
-        },
-        computed: {
-            "screenWidth": function(){
-                return window.innerWidth;
-            }
-        },
-        created: function(){
-            let storage = window.localStorage;
-            let user = storage.getItem('user');
-            if( user != null && user != undefined ){
-                user = JSON.parse(user);
-                this.user = user;
             }
         },
     }

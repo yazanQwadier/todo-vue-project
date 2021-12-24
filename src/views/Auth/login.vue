@@ -82,7 +82,8 @@
                                         email: response.data.response['email'],
                                     };
                                     this.setUserInCache(user);
-                                    window.location.href = "/";
+                              
+                                    this.$router.push('/');
                                 }
                                 else{
                                     let statusElement = document.getElementsByClassName('alert-status')[0];
@@ -104,6 +105,7 @@
             },
             "setUserInCache": function(user){
                 window.localStorage.setItem('user', JSON.stringify(user));
+                this.$store.commit('auth/setUserObject', user);
             }
         }
     }

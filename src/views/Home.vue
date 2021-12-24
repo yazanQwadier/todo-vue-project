@@ -79,8 +79,7 @@ export default {
   },
   methods: {
     getUserFromStorage(){
-      let storage = window.localStorage;
-      let user = storage.getItem('user');
+      let user = window.localStorage.getItem('user');
       if(user != null && user != undefined){
         user = JSON.parse(user);
         this.$store.commit('auth/setUserObject', user);

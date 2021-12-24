@@ -58,7 +58,19 @@ export default{
   components: {
     Navbar
   },
+  methods: {
+     getUserFromStorage(){
+      let storage = window.localStorage;
+      let user = storage.getItem('user');
+      if(user != null && user != undefined){
+        user = JSON.parse(user);
+        this.$store.commit('auth/setUserObject', user);
+      }
+    }
+  },
   created: function(){
+    this.getUserFromStorage();
+
     let dark_mode = localStorage.getItem("dark_mode");
     if( dark_mode == '1' ){
       window.document.body.classList.add("dark-mode");

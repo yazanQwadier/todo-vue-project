@@ -78,14 +78,15 @@ export default {
                 axios.post( config.api_url() +"/authentication/register", formData)
                     .then((response) => {
                         if( response.status == 200 ){
-                            if(response.data.status != "failed"){
+                            if(response.data['status'] == "success"){
                                 let user = {
                                     id: response.data.response['id'],
                                     username: response.data.response['username'],
                                     email: response.data.response['email'],
                                 };
+
                                 this.setUserInCache(user);
-                                window.location.href = "/";
+                                this.$router.push('/');
                             }
                             else{
                                 let type = response.data.type;
@@ -130,6 +131,7 @@ export default {
         },
         "setUserInCache": function(user){
             window.localStorage.setItem('user', JSON.stringify(user));
+            this.$store.commit('auth/setUserObject', user);
         }
     }
 }
